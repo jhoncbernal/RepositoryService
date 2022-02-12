@@ -1,7 +1,5 @@
 # REPOSITORY-SERVICE
 
-domain-driven-design + clean-architecture + hexagonal-architecture + CQRS
-
 ## Installation
 
 ```bash
