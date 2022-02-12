@@ -1,5 +1,23 @@
 version: "3.8"
 services:
+  node:
+    container_name: node-${PROJECT_NAME}
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_HOSTNAME: "mongo"
+    expose:
+      - ${SERVER_PORT}
+    ports:
+      - ${SERVER_PORT}:8000
+    networks:
+      - repository-service
+    logging:
+      driver: "none"
   mongo:
     container_name: mongo-${PROJECT_NAME}
     image: mongo:4.4.6-bionic
@@ -13,5 +31,10 @@ services:
     volumes:
       # - ./db-data:/data/db
       - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+    networks:
+      - repository-service
     logging:
       driver: "none"
+networks:
+  repository-service:
+    driver: bridge
