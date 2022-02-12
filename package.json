@@ -9,8 +9,7 @@
     "test": "jest unit --setupFiles dotenv/config",
     "test:integration": "jest integration --passWithNoTests --setupFiles dotenv/config",
     "quickTest": "jest unit --bail --silent --setupFiles dotenv/config",
-    "serve": "yarn build && node dist/app.js",
-    "prepare": "husky install"
+    "serve": "yarn build && node dist/app.js"
   },
   "keywords": [
     "template",
