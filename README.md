@@ -1,5 +1,7 @@
 # REPOSITORY-SERVICE
 
+The service-oriented architecture repository is part of an arrangement to store critical information about the service-oriented architecture as a whole
+
 ## Installation
 
 ```bash
@@ -60,7 +62,8 @@ Compile the project and run it
 ```bash
 yarn serve
 ```
-## Documentation 
+
+## Documentation
 
 https://www.getpostman.com/collections/b1753be0afa7a703fe5b
 
