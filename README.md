@@ -2,6 +2,20 @@
 
 The service-oriented architecture repository is part of an arrangement to store critical information about the service-oriented architecture as a whole
 
+## Context
+
+Implement a REST API in NodeJs 16.x that handles CRUD requests.
+
+#### Example of a user
+
+`"id":2, "email":"janet.weaver@reqres.in", "name":"Janet Weaver", "phone":"435594689", "company":"StatusCode Weekly"`
+
+- Create a Docerized instance of this database. Write the NoSQL and a dockerfile to launch the DB, and create the collections required.
+
+## Related Links
+
+- Postman Collection: https://www.getpostman.com/collections/a6da8f4b09a4a791298a.
+
 ## Installation
 
 ```bash
@@ -76,3 +90,23 @@ docker network create intranet
 
 sh deploy.sh
 ```
+
+## Manual Testing Steps
+
+- Please Run the application with this command: `docker-compose -f "docker-compose.yml" up -d --build`
+- Go to http://localhost:4000/v1/api/user
+- for a dev enviroment create a file (".env") and add the following variables:
+
+```bash PROJECT_NAME=base-app
+PROJECT_MODE=development
+SERVER_HOSTNAME="http://localhost"
+SERVER_PORT=3000
+
+MONGODB_HOSTNAME=127.0.0.1
+MONGODB_PORT=27018
+MONGODB_USERNAME=root
+MONGODB_PASSWORD=newPassword
+MONGODB_DATABASE=service_repository_dev
+```
+
+- Also you can enter to the coinainer log and check the log
