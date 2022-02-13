@@ -6,7 +6,7 @@ export default function ErrorMiddleware(
   res: Response,
   next: NextFunction
 ) {
-  const httpStatus = 300;
+  const httpStatus = 500;
   return res.status(httpStatus).send({
     status: httpStatus,
     message: err.message || "Internal server error",

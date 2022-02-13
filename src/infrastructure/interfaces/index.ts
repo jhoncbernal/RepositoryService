@@ -1,5 +1,3 @@
-import { Request, Response } from "express";
-import { Model as MongooseModel } from "mongoose";
 export interface Service {
   get(id: string): Promise<any>;
   getAll(
@@ -29,9 +27,9 @@ export interface Repository {
 }
 
 export interface Controller {
-  get(req: Request, res: Response): Promise<any>;
-  getAll(req: Request, res: Response): Promise<any>;
-  update(req: Request, res: Response): Promise<any>;
-  delete(req: Request, res: Response): Promise<any>;
-  create(req: Request, res: Response): Promise<any>;
+  get(...args: any): Promise<any>;
+  getAll(...args: any): Promise<any>;
+  update(...args: any): Promise<any>;
+  delete(...args: any): Promise<any>;
+  create(...args: any): Promise<any>;
 }
