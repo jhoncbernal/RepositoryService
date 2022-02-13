@@ -10,12 +10,13 @@ const UserSchema = new Schema(
       index: true,
     },
 
-    name: { type: String, required: true },
+    name: { type: String, required: [true, "What is your name?"] },
     phone: {
-      type: String,
+      type: Number,
       unique: true,
       required: [true, "What is your contact number?"],
     },
+    company: { type: String, required: [true, "What is your company name?"] },
   },
   { timestamps: true }
 );

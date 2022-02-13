@@ -8,7 +8,14 @@ Implement a REST API in NodeJs 16.x that handles CRUD requests.
 
 #### Example of a user
 
-`"id":2, "email":"janet.weaver@reqres.in", "name":"Janet Weaver", "phone":"435594689", "company":"StatusCode Weekly"`
+```bash
+{
+    "email": "janet.weaver@reqres.in",
+    "name": "Janet Weaver",
+    "phone": "435594689",
+    "company": "StatusCode Weekly"
+}
+```
 
 - Create a Docerized instance of this database. Write the NoSQL and a dockerfile to launch the DB, and create the collections required.
 
