@@ -11,7 +11,6 @@ import UserService from "@/services/user.service";
 
 export const UserContainerModule = new ContainerModule(
   (bind: interfaces.Bind, unbind: interfaces.Unbind) => {
-
     bind<IRouter>(TYPES.Router).toDynamicValue(
       (context: interfaces.Context): IRouter => {
         return Router(

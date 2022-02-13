@@ -5,7 +5,6 @@ import { Controller } from "@/infrastructure/interfaces";
 import userRoutes from "./user.routes";
 export default function Router(UserController: Controller): express.Router {
   const router = express.Router();
-  
   const apiRoutes = express.Router();
 
   apiRoutes
