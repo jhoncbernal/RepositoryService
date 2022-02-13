@@ -1,7 +1,7 @@
 import { Controller, Service } from "@/infrastructure/interfaces";
 import { TYPES } from "@/infrastructure/types";
 import { NextFunction, Request, Response } from "express";
-import { inject, injectable } from "inversify";
+import { inject } from "inversify";
 import { provide } from "inversify-binding-decorators";
 
 @provide(TYPES.Controller)
@@ -27,10 +27,14 @@ export class UserController implements Controller {
   }
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const { id: userId } = req.params;
-      const { pageSize, pageNum } = req.query;
-
-      const users = await this.userService.getAll("uniquecode", "", 10, 1, "");
+      const { pageSize, pageNum, orderBy } = req.query;
+      const users = await this.userService.getAll(
+        "",
+        "",
+        Number(pageSize),
+        Number(pageNum),
+        String(orderBy)
+      );
       return res.send(users);
     } catch (error: any) {
       next(error);

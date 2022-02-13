@@ -20,7 +20,7 @@ class BaseRepository implements Repository {
     const skips = pageSize * (pageNum - 1);
     return await this.model
       .find({ [propName]: value })
-      .sort(-orderBy)
+      .sort(`-${orderBy}`)
       .skip(skips)
       .limit(pageSize);
   }
