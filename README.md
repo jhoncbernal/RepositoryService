@@ -39,7 +39,7 @@ PROJECT_MODE=development
 SERVER_HOSTNAME="http://localhost"
 SERVER_PORT=3000
 
-MONGODB_HOSTNAME=127.0.0.1
+MONGODB_HOSTNAME=127.0.0.1 ## to build the container you should use "mongo" insted of 127...
 MONGODB_PORT=27018
 MONGODB_USERNAME=root
 MONGODB_PASSWORD=newPassword
@@ -109,7 +109,7 @@ PROJECT_MODE=development
 SERVER_HOSTNAME="http://localhost"
 SERVER_PORT=3000
 
-MONGODB_HOSTNAME=127.0.0.1
+MONGODB_HOSTNAME=127.0.0.1 ## to build the container you should use "mongo" insted of 127...
 MONGODB_PORT=27018
 MONGODB_USERNAME=root
 MONGODB_PASSWORD=newPassword
