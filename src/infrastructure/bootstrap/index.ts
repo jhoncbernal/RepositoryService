@@ -3,20 +3,27 @@ import { StartModule } from "@/index";
 import { startExpress } from "@/infrastructure/framework/express.framework";
 import { mongooseConnection } from "@/infrastructure/database/mongoose.database";
 import { AppDependencies } from "@/infrastructure/d-injection/config";
-import { UserContainerModule } from "@/infrastructure/Module";
+import { UserContainerModule } from "@/infrastructure/Module/user.container";
 import { TYPES } from "@/infrastructure/types";
-import { Router } from "express";
+import { AppRouter } from "@/routes";
+import { AuthContainerModule } from "../Module/auth.container";
+import { ShareContainerModule } from "../Module/share.container";
 
 export class SharedBootstrap implements StartModule {
   async init(): Promise<void> {
     try {
-      AppContainer.load(UserContainerModule);
+      AppContainer.load(
+        ShareContainerModule,
+        UserContainerModule,
+        AuthContainerModule
+      );
 
       // database connection
       await mongooseConnection();
 
       // express server
-      let router = AppContainer.get<Router>(TYPES.Router);
+      const appRouterInstance = AppContainer.get<AppRouter>(TYPES.Router);
+      const router = appRouterInstance.router;
       await startExpress(router);
 
       // independency injection

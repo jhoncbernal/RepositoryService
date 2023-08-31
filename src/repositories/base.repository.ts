@@ -22,16 +22,17 @@ class BaseRepository implements Repository {
       .find({ [propName]: value })
       .sort(`-${orderBy}`)
       .skip(skips)
-      .limit(pageSize);
+      .limit(pageSize)
+      .lean();
   }
   async create(entity: any) {
     return await this.model.create(entity);
   }
   async update(id: any, entity: any) {
-    return await this.model.findByIdAndUpdate(id, entity, { new: true });
+    return await this.model.findByIdAndUpdate(id, entity, { new: true }).lean();
   }
   async delete(id: any) {
-    return await this.model.findByIdAndDelete(id);
+    return await this.model.findByIdAndDelete(id).lean();
   }
 }
 export default BaseRepository;
