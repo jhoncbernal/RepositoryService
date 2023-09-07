@@ -13,3 +13,4 @@ coverage
 .vscode
 logs
 newrelic_agent.log
+*.log

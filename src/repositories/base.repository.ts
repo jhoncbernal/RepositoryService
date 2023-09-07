@@ -1,14 +1,14 @@
 import { Repository } from "@/infrastructure/interfaces";
-import { mongooseObj } from "@/infrastructure/database/mongoose.database";
 import { Model } from "mongoose";
 import { injectable } from "inversify";
+
 @injectable()
 class BaseRepository implements Repository {
   constructor(private readonly model: Model<any>) {
     this.model = model;
   }
   async get(id: string) {
-    return await this.model.findById(mongooseObj(id));
+    return await this.model.findById(id);
   }
   async getAll(
     propName: any,

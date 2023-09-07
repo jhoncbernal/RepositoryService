@@ -1,12 +1,14 @@
 import { Repository, Service } from "@/infrastructure/interfaces";
 import { injectable } from "inversify";
+import validator from "validator";
+const { isEmpty, isUUID } = validator;
 @injectable()
 class BaseService implements Service {
   constructor(private readonly baseRepository: Repository) {
     this.baseRepository = baseRepository;
   }
   async get(id: string) {
-    if (!id) {
+    if (isEmpty(id) || !isUUID(id)) {
       const error = new Error();
       error.message = "id must be sent";
       throw error;
