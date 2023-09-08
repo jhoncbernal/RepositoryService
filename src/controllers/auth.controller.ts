@@ -109,17 +109,16 @@ export class AuthController extends BaseController<Service> {
     }
   }
 
-  async registerProvider(req: Request, res: Response, next: NextFunction) {
-    const { email, provider, providerId } = req.body;
+   async registerProvider(req: Request, res: Response, next: NextFunction) {
+    const { email, provider, providerId, name, img } = req.body;
 
     // Check if a user with the given email already exists
-    const existingUser: IAuthDocument | null = await this.authService.get(
-      email
-    );
-    if (existingUser) {
-      return res.status(400).send({ message: "Email already in use" });
+    const existingAuth = await this.authService.getByEmail(email);
+    if (existingAuth) {
+      const existingUser = await this.userService.getByAuth(existingAuth._id);
+      res.status(200).send(existingUser);
     } else {
-      const user: IAuthDocument = await this.authService.create({
+      const auth = await this.authService.create({
         email,
         provider,
         providerId,
@@ -127,6 +126,20 @@ export class AuthController extends BaseController<Service> {
         isVerified: true,
         isOnline: true,
       });
+      const policyHistory = [
+        {
+          version: "1.0",
+          acceptedDate: Date.now(),
+        },
+      ];
+      const user = await this.userService.create({
+        name,
+        acceptPolicity: true,
+        policyHistory,
+        auth: auth._id,
+        photo: img,
+      });
+
       res.status(201).send(user);
     }
   }
