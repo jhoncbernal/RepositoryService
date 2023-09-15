@@ -3,21 +3,11 @@ import webpack from "webpack";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import nodeExternals from "webpack-node-externals";
 import NodemonPlugin from "nodemon-webpack-plugin";
-import CopyPlugin from "copy-webpack-plugin";
 import ESLintPlugin from "eslint-webpack-plugin";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
-import dotenv from "dotenv";
-import fs from "fs";
 
-const { NODE_ENV = "production" }: any = process.env;
-
-const copyEnv: any = fs.existsSync("./.env")
-  ? [
-      new CopyPlugin({
-        patterns: [{ from: ".env" }],
-      }),
-    ]
-  : [];
+const NODE_ENV: "development" | "production" | "none" =
+  (process.env.NODE_ENV as any) || "production";
 
 const config: webpack.Configuration = {
   entry: [path.resolve(__dirname, "src")],
@@ -46,11 +36,12 @@ const config: webpack.Configuration = {
     ],
   },
   devtool: "source-map",
-  externals: [nodeExternals()] as webpack.Configuration["externals"],
+  externals: [nodeExternals()],
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
-      "process.env": JSON.stringify(dotenv.config().parsed),
+      "process.env.NODE_ENV": JSON.stringify(NODE_ENV),
+      // Define other environment variables here as needed
     }),
     new ESLintPlugin({
       extensions: [".tsx", ".ts", ".js"],
@@ -60,8 +51,7 @@ const config: webpack.Configuration = {
       verbose: true,
       delay: 500,
     }),
-    ...copyEnv,
-  ] as webpack.Configuration["plugins"],
+  ],
   stats: {
     warnings: true,
   },

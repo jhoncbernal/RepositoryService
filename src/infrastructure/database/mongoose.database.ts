@@ -2,11 +2,14 @@ import { MONGO_DB } from "@/infrastructure/config";
 
 const mongoose: any = require("mongoose");
 export const mongooseObj = mongoose.Types.ObjectId;
-
 export const mongooseConnection = async () => {
   const uri: string =
-    MONGO_DB.username && MONGO_DB.password
+    MONGO_DB.username &&
+    MONGO_DB.password &&
+    !MONGO_DB?.hostname?.includes("cluster")
       ? `mongodb://${MONGO_DB.username}:${MONGO_DB.password}@${MONGO_DB.hostname}:${MONGO_DB.port}/${MONGO_DB.database}`
+      : MONGO_DB?.hostname?.includes("cluster")
+      ? `mongodb+srv://${MONGO_DB.username}:${MONGO_DB.password}@${MONGO_DB.hostname}/${MONGO_DB.database}`
       : `mongodb://${MONGO_DB.hostname}:${MONGO_DB.port}/${MONGO_DB.database}`;
 
   const publicURI = `${MONGO_DB.hostname}:${MONGO_DB.port}/${MONGO_DB.database}`;

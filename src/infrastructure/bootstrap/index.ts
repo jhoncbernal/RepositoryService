@@ -8,6 +8,7 @@ import { TYPES } from "@/infrastructure/types";
 import { AppRouter } from "@/routes";
 import { AuthContainerModule } from "../Module/auth.container";
 import { ShareContainerModule } from "../Module/share.container";
+import { ImageContainerModule } from "../Module/image.container";
 
 export class SharedBootstrap implements StartModule {
   async init(): Promise<void> {
@@ -15,7 +16,8 @@ export class SharedBootstrap implements StartModule {
       AppContainer.load(
         ShareContainerModule,
         UserContainerModule,
-        AuthContainerModule
+        AuthContainerModule,
+        ImageContainerModule
       );
 
       // database connection

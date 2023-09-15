@@ -8,7 +8,10 @@ import userRoutes from "./user.routes";
 import authRoutes from "./auth.routes";
 import { TYPES } from "@/infrastructure/types"; // Assuming you have a TYPES object for identifiers
 import { AuthController } from "@/controllers/auth.controller";
+import { ImageController } from "@/controllers/image.controller";
 import cors from "cors";
+import imageRoutes from "./image.routes";
+import fileUpload from "express-fileupload";
 
 @injectable()
 export class AppRouter {
@@ -16,7 +19,8 @@ export class AppRouter {
 
   constructor(
     @inject(TYPES.UserController) private UserController: Controller,
-    @inject(TYPES.AuthController) private AuthController: AuthController
+    @inject(TYPES.AuthController) private AuthController: AuthController,
+    @inject(TYPES.ImageController) private ImageController: ImageController
   ) {
     this._router = express.Router();
     this.configureRoutes();
@@ -36,10 +40,12 @@ export class AppRouter {
     apiRoutes
       .use(express.json())
       .use(express.urlencoded({ extended: true }))
-      .use(helmet());
+      .use(helmet())
+      .use(fileUpload());
 
     apiRoutes.use("/users", userRoutes(this.UserController));
     apiRoutes.use("/auth", authRoutes(this.AuthController));
+    apiRoutes.use("/images", imageRoutes(this.ImageController));
 
     this._router.use("/api/v1", apiRoutes);
     this._router.use(ErrorMiddleware);

@@ -13,7 +13,7 @@ services:
     expose:
       - ${SERVER_PORT}
     ports:
-      - ${SERVER_PORT}:8000
+      - ${SERVER_PORT}:4000
     networks:
       - repository-service
     logging:
@@ -27,7 +27,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
       MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
     ports:
-      - ${MONGODB_PORT}:27017
+      - ${MONGODB_PORT}:27018
     volumes:
       # - ./db-data:/data/db
       - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh

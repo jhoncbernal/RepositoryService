@@ -109,7 +109,7 @@ export class AuthController extends BaseController<Service> {
     }
   }
 
-   async registerProvider(req: Request, res: Response, next: NextFunction) {
+  async registerProvider(req: Request, res: Response, next: NextFunction) {
     const { email, provider, providerId, name, img } = req.body;
 
     // Check if a user with the given email already exists

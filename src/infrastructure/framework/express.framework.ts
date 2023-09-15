@@ -5,7 +5,7 @@ export const app: core.Express = express();
 
 export const startExpress = (router: Router): Promise<void> => {
   app.use(router);
-  const port = PROJECT.mode === "development" ? SERVER.port : 80;
+  const port = SERVER.port;
   return new Promise<void>((resolve) => {
     app.listen(port, () => {
       console.info(

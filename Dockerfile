@@ -1,5 +1,5 @@
-# build and config environment
-FROM keymetrics/pm2:14-alpine
+# Use Node.js 18.16.0 as the base image
+FROM node:18.16.0-alpine
 WORKDIR /app
 COPY . .
 

@@ -4,6 +4,9 @@ const TYPES = {
   EventBus: Symbol.for("EventBus"),
   Config: Symbol.for("Config"),
 
+  ImageController: Symbol.for("ImageController"),
+  ImageService: Symbol.for("ImageService"),
+
   UserController: Symbol.for("UserController"),
   UserService: Symbol.for("UserService"),
   UserRepository: Symbol.for("UserRepository"),
